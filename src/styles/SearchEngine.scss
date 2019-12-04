@@ -1,0 +1,24 @@
+a:hover {
+    text-decoration: none !important;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: #ffc107;
+    box-shadow: none;
+}
+
+.list-group {
+    z-index: 10;
+    width: calc(100% - 1rem);
+    max-height: calc(400px - 7px);
+    overflow: hidden;
+}
+
+.list-group-item:hover {
+    cursor: pointer;
+    background-color: darken(#fff, 5%);
+}
