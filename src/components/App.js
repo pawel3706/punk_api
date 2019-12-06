@@ -16,7 +16,7 @@ class App extends Component {
   render() { 
     return (
       <ProductsProvider>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Route exact path={["/", "/search", "/cart"]} component={Navbar}/>
           <Route exact path={["/", "/search"]} component={SearchEngine}/>
           <Switch>
