@@ -182,9 +182,21 @@ class ProductsProvider extends Component {
     }
 
     changePage = (number) => {
-        this.setState({
-            currentPage: number,
-        }, () => this.getProducts())
+
+        if (number === "previous") {
+            this.setState({
+                currentPage: this.state.currentPage - 2,
+            }, () => this.getProducts());
+        } else if (number === "next") {
+            this.setState({
+                currentPage: this.state.currentPage + 2,
+            }, () => this.getProducts());
+        } else {
+            this.setState({
+                currentPage: number,
+            }, () => this.getProducts());
+        }
+        
     }
 
     render() {
