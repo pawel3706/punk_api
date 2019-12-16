@@ -19,7 +19,7 @@ class Search extends Component {
                                 {products.length > 0 && showOptions && 
                                     <>
                                         <h3 className="text-center py-4">{`Wyniki wyszukiwania dla: ${searchPhrase}`}</h3>
-                                        <ProductList list={products}/>
+                                        <ProductList/>
                                     </>
                                 }
                                 {products.length === 0 && showOptions &&

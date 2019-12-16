@@ -3,18 +3,23 @@ import defaultImg from './img/keg.png';
 const ProductContext = React.createContext();
 
 class ProductsProvider extends Component {
-    state = {
-        products: [],
-        modalIsOpen: false,
-        modalProduct: '',
-        cart: '',
-        totalAmount: 0,
-        pageLimit: 12,
-        currentPage: 1,
-        productNumber: 325,
-        searchPhrase: '',
-        showOptions: false,
-        prices: [],
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            products: [],
+            modalIsOpen: false,
+            modalProduct: '',
+            cart: '',
+            totalAmount: 0,
+            pageLimit: 12,
+            currentPage: 1,
+            productNumber: 325,
+            searchPhrase: '',
+            showOptions: false,
+            prices: [],
+            productsUpdate: false,
+        }
     }
 
     fetchData = (url) => {
@@ -52,6 +57,7 @@ class ProductsProvider extends Component {
     }
 
     getProducts= () => {
+        console.log('get products')
         const {pageLimit, currentPage} = this.state;
 
         const url = `https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=${pageLimit}`;
@@ -61,8 +67,9 @@ class ProductsProvider extends Component {
             
             this.setState({
                 products,
-            })
-        });
+                productsUpdate: true,
+            }, () => this.setState({productsUpdate: false}))
+        },);
     }
 
     getSearchOptions = (value) => {
@@ -200,6 +207,7 @@ class ProductsProvider extends Component {
     }
 
     render() {
+        console.log(this.state.productsUpdate)
         return ( 
             <ProductContext.Provider value={{
                 ...this.state,

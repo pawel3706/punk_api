@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {ProductsConsumer} from '../context';
+import {ProductContext} from '../context'
 
 class Pagination extends Component {
 
     constructor(props) {
         super(props);
         this.divContainer = React.createRef();
+        this.state = {}
     }
 
     middleButtons = (start, end) => {
@@ -18,7 +20,7 @@ class Pagination extends Component {
 
     getPageList = data => {
 
-        const {productNumber, pageLimit, currentPage, changePage} = data;
+        const {productNumber, pageLimit, currentPage} = data;
 
         const lastPage = Math.ceil(productNumber/pageLimit);
         const middleLeft = Math.max(2, currentPage - 1);
@@ -45,19 +47,26 @@ class Pagination extends Component {
         }
 
         return (
-            buttons.map(item => <PageItem key={item} name={item} currentPage={currentPage} changePage={changePage}/>)
+            buttons.map(item => <PageItem key={item} number={item} currentPage={currentPage} handleClick={this.handleClick}/>)
         )
     }
 
-    componentDidUpdate() {
-        this.divContainer.current.scrollIntoView();
+    handleClick = (name) => {
+        this.context.changePage(name);
     }
 
-    render() { 
+    componentDidUpdate() {
+        if(this.context.productsUpdate) {
+            this.divContainer.current.scrollIntoView();   
+        }
+    }
+
+    render() {
+        console.log('render pagination')
         return ( 
-            <div className="container" ref={this.divContainer}>
+            <div className="container">
                 <div className="row justify-content-center my-5">
-                    <div className="pagination">
+                    <div className="pagination" ref={this.divContainer}>
                         <ProductsConsumer>
                             {data => {
                                 return (
@@ -74,25 +83,26 @@ class Pagination extends Component {
     }
 }
 
+Pagination.contextType = ProductContext;
 export default Pagination;
 
-const PageItem = ({name, changePage, currentPage}) => {
+const PageItem = ({number, currentPage, handleClick}) => {
 
-    if (name === "previous") return (
+    if (number === "previous") return (
         <li className="page-item">
-            <div onClick={() => changePage(name)} className="page-link" style={{cursor: 'pointer'}}><i className="fas fa-angle-double-left"></i></div>
+            <div onClick={() => handleClick(number)} className="page-link" style={{cursor: 'pointer'}}><i className="fas fa-angle-double-left"></i></div>
         </li>
     );
 
-    if (name === "next") return (
+    if (number === "next") return (
         <li className="page-item">
-            <div onClick={() => changePage(name)} className="page-link" style={{cursor: 'pointer'}}><i className="fas fa-angle-double-right"></i></div>
+            <div onClick={() => handleClick(number)} className="page-link" style={{cursor: 'pointer'}}><i className="fas fa-angle-double-right"></i></div>
         </li>
     );
 
     return ( 
-        <li className={`page-item ${name === currentPage ? 'active' : ''}`}>
-            <div onClick={() => changePage(name)} className="page-link font-weight-bolder" style={{cursor: 'pointer'}}>{name}</div>
+        <li className={`page-item ${number === currentPage ? 'active' : ''}`}>
+            <div onClick={() => handleClick(number)} className="page-link font-weight-bolder" style={{cursor: 'pointer'}}>{number}</div>
         </li>
      );
 }

@@ -6,8 +6,8 @@ import Cart from './Cart';
 import SearchEngine from './SearchEngine';
 import Home from './Home';
 import Search from './Search';
-import Default from './Default';
 import Modal from './Modal';
+import Default from './Default';
 import {ProductsProvider} from '../context'
 
 

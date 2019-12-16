@@ -18,6 +18,10 @@ a:hover {
     overflow: hidden;
 }
 
+.list-group-item {
+    white-space: nowrap;
+}
+
 .list-group-item:hover {
     cursor: pointer;
     background-color: darken(#fff, 5%);

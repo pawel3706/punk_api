@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ProductList from './ProductList';
 import Pagination from './Pagination';
+
 import {ProductsConsumer, ProductContext} from '../context';
 
 class Home extends Component {

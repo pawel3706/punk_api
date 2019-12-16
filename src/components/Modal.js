@@ -17,9 +17,9 @@ const Modal = () => {
                                 <div className="container">
                                     <div className="row">
                                         <div className="modal-window__content col-8 col-md-6 col-lg-4 mx-auto p-4 d-flex flex-column align-items-center">
-                                            <h5 className="p-2" >Dodano produkt do koszyka</h5>
+                                            <h5 className="p-2 text-center">Dodano produkt do koszyka</h5>
                                             <img className='modal-window__image' style={{height: `${size.height}px`, width: `${size.width}px`}} src={image_url} alt={name}/>
-                                            <h5 className="pt-2" >{name}</h5>
+                                            <h5 className="pt-2 text-center" >{name}</h5>
                                             <h5 className="text-muted">{`Cena: ${price} zł`}</h5>
                                             <button onClick={value.closeModal} className="btn btn-primary mb-2">Wróć do zakupów</button>
                                             <NavLink to="/cart">

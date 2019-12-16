@@ -68,7 +68,7 @@ class SearchEngine extends Component {
     componentDidMount() {
         this.getOptionNames();
     }
-
+    
     render() { 
         return ( 
             <div className='search-engine container my-3 my-md-5 pt-2'>
